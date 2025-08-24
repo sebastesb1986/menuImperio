@@ -442,20 +442,24 @@ body {
     }
     
     .product-description {
-        min-height: auto;
-        max-height: none;
+        min-height: auto !important;
+        max-height: none !important;
+        height: auto !important;
         font-size: 1.2rem;
         line-height: 1.4;
         padding: 0.8rem;
-        overflow: visible;
+        overflow: visible !important;
         word-break: break-word;
         hyphens: auto;
         text-align: left;
+        display: block;
+        white-space: normal;
     }
     
     .product-card {
         min-height: auto;
         padding: 1rem;
+        height: auto;
     }
     
     .product-name {
@@ -501,6 +505,12 @@ body {
         font-size: 1.1rem;
         line-height: 1.5;
         padding: 0.6rem;
+        min-height: auto !important;
+        max-height: none !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: block;
+        white-space: normal;
     }
     
     .product-name {
@@ -520,6 +530,7 @@ body {
     
     .product-card {
         padding: 0.8rem;
+        height: auto;
     }
     
     .header h1 {
@@ -528,5 +539,20 @@ body {
     
     .header p {
         font-size: 1.1rem;
+    }
+}
+
+/* Override específico para asegurar que el texto se vea completo en móviles */
+@media (max-width: 768px) {
+    .product-description {
+        overflow: visible !important;
+        min-height: auto !important;
+        max-height: none !important;
+        height: auto !important;
+        display: block !important;
+        white-space: normal !important;
+        text-overflow: unset !important;
+        -webkit-line-clamp: unset !important;
+        -webkit-box-orient: unset !important;
     }
 }
