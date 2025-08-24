@@ -421,7 +421,7 @@ function crearTarjetaFrijolSimple() {
             <h3 class="product-name">Porción de Frijol</h3>
             <p class="product-description ${claseDescripcion}">${descripcion}</p>
             <div class="product-price">
-                <div class="precio-simple">${formatearPrecio(10000)}</div>|
+                <div class="precio-simple">${formatearPrecio(10000)}</div>
                 <div class="precio-desechable">${formatearPrecio(10500)}</div>
             </div>
         </div>
@@ -430,17 +430,17 @@ function crearTarjetaFrijolSimple() {
 
 // Función para crear tarjeta especial de frijol con chicharrón
 function crearTarjetaFrijolConChicharron() {
-    const descripcion = "Porción de frijol ychicharrón | Con desechable";
+    const descripcion = "Porción de frijol y chicharrón | Con desechable";
     const esUnaLinea = descripcion.length <= 50;
     const claseDescripcion = esUnaLinea ? 'single-line' : 'multi-line';
     
     return `
         <div class="product-card">
-            <img src="img/17.jpg" alt="Porción de frijol con chicharrón" class="product-image">
+            <img src="img/17.jpg" alt="Porción de frijol y chicharrón" class="product-image">
             <h3 class="product-name">Porción de Frijol y Chicharrón</h3>
             <p class="product-description ${claseDescripcion}">${descripcion}</p>
             <div class="product-price">
-                <div class="precio-simple">${formatearPrecio(11000)}</div>|
+                <div class="precio-simple">${formatearPrecio(11000)}</div>
                 <div class="precio-desechable">${formatearPrecio(12000)}</div>
             </div>
         </div>
