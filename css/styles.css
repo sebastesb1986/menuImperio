@@ -154,7 +154,7 @@
 
 /* Estilos para el precio en negrilla */
 .product-price {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 900;
     color: var(--color-rojo);
     background: linear-gradient(45deg, var(--color-amarillo-claro), var(--color-amarillo));
