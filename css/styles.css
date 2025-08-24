@@ -1,0 +1,455 @@
+/* Estilos adicionales para mejorar la apariencia */
+.product-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 25px;
+    padding: 1.5rem;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    min-height: 500px; /* Altura reducida para que se vea el precio */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px;
+    padding: 2px;
+    background: linear-gradient(45deg, var(--color-naranja), var(--color-rojo), var(--color-amarillo));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+}
+
+.product-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-amarillo), var(--color-naranja), var(--color-rojo));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover::after {
+    transform: scaleX(1);
+}
+
+/* Layout específico para 2 columnas con 1 producto por columna */
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.menu-grid .product-card:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.menu-grid .product-card:nth-child(2) {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+/* Imágenes que ocupan todo su panel */
+.product-image {
+    width: 100%;
+    height: 320px;
+    border-radius: 20px;
+    margin: 0 auto;
+    border: 4px solid var(--color-amarillo);
+    transition: transform 0.3s ease;
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    box-shadow: 0 8px 25px rgba(244, 162, 97, 0.3);
+    padding: 0;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Estilos para el nombre del producto */
+.product-name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--color-naranja);
+    margin-bottom: 0.8rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    line-height: 1.2;
+}
+
+/* Estilos para la descripción del producto */
+.product-description {
+    font-size: 1.4rem;  /* Aumentar el tamaño de la fuente */
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.0;
+    margin-bottom: 0.7rem;
+    text-align: center;
+    min-height: 4.5rem; /* Altura fija para mantener el diseño */
+    max-height: 5.5rem; /* Altura máxima fija */
+    overflow: hidden; /* Evitar que el contenido se desborde */
+    padding: 0.4rem; /* Aumentar el padding para evitar que el texto quede pegado a los bordes */
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    border: 2px solid rgba(244, 162, 97, 0.4);
+    word-wrap: break-word; /* Romper palabras largas */
+}
+
+
+
+/* Estilos para la observación del producto */
+.product-observation {
+    background: white;
+    color: #dc3545;
+    padding: 0.7rem 1.2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(214, 40, 40, 0.4);
+    border: 2px solid var(--color-rojo);
+}
+
+/* Estilos para el precio en negrilla */
+.product-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-rojo);
+    background: linear-gradient(45deg, var(--color-amarillo-claro), var(--color-amarillo));
+    padding: 1rem 2rem;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(214, 40, 40, 0.4);
+    border: 3px solid var(--color-amarillo);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Estilos para precios múltiples en tarjetas de frijol */
+.product-price .precio-simple,
+.product-price .precio-desechable {
+    display: inline-block;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.product-price .precio-simple {
+    background: var(--color-amarillo-claro);
+    color: var(--color-oscuro);
+    border: 2px solid var(--color-amarillo);
+}
+
+.product-price .precio-desechable {
+    background: var(--color-naranja);
+    color: white;
+    border: 2px solid var(--color-naranja);
+}
+
+/* Animación de entrada para las tarjetas */
+.product-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estilos para el header centrado */
+.header {
+    text-align: center;
+    background: linear-gradient(135deg, var(--color-naranja), var(--color-rojo), var(--color-amarillo));
+    color: white;
+    padding: 3rem 0;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ffffff, #f9f9f9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header p {
+    font-size: 1.5rem;
+    margin: 0;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+/* Estilos para pantalla completa por defecto */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.menu-container {
+    height: 100vh;
+    width: 100vw;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+/* Ocultar indicador de página pero mantener funcionalidad */
+.page-indicator {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    background: transparent !important;
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+/* Estilos para el scrollbar personalizado */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-oscuro);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--color-naranja), var(--color-rojo));
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, var(--color-rojo), var(--color-naranja));
+}
+
+/* Ocultar completamente los controles del carousel */
+.carousel-controls {
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    background: transparent !important;
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+/* Efectos de hover mejorados */
+.carousel-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.product-card:hover {
+    transform: translateY(-15px) scale(1.02);
+}
+
+/* Estilos para dispositivos táctiles */
+@media (hover: none) {
+    .product-card:hover {
+        transform: none;
+    }
+    
+    .carousel-btn:hover {
+        transform: none;
+    }
+}
+
+/* Mejoras para televisores 4K */
+@media (min-width: 2560px) {
+    .header {
+        padding: 3rem 0;
+    }
+    
+    .menu-container {
+        padding: 0 4rem;
+    }
+    
+    .carousel-btn {
+        padding: 1.5rem 3rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* Estilos para productos sin imagen (solo listados) */
+.section-title {
+    text-align: center;
+    color: var(--color-amarillo-claro);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.productos-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.product-item-no-image {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(145deg, var(--color-claro), #E9ECEF);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--color-naranja);
+}
+
+.product-item-no-image:hover {
+    transform: translateX(10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border-left-color: var(--color-rojo);
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name-no-image {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--color-oscuro);
+    margin: 0 0 0.5rem 0;
+}
+
+.product-description-no-image {
+    font-size: 1rem;
+    color: #495057;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.4;
+}
+
+.product-observation-no-image {
+    background: var(--color-amarillo-claro);
+    color: var(--color-oscuro);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.product-price-no-image {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-rojo);
+    background: var(--color-amarillo-claro);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 2rem;
+    }
+    
+    .menu-grid .product-card:nth-child(n) {
+        grid-row: auto;
+        grid-column: 1;
+    }
+    
+    .product-image {
+        height: 220px;
+        padding: 0;
+    }
+    
+    .product-description {
+        min-height: 4.5rem;
+        max-height: 4.5rem;
+        font-size: 1.1rem;
+    }
+    
+    .product-card {
+        min-height: 400px;
+    }
+    
+    /* Responsive para precios múltiples en móvil */
+    .product-price .precio-simple,
+    .product-price .precio-desechable {
+        display: block;
+        margin: 0.3rem 0;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .product-item-no-image {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .product-price-no-image {
+        min-width: auto;
+        width: 100%;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
