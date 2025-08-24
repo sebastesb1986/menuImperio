@@ -388,6 +388,10 @@ function formatearPrecio(precio) {
 
 // Función para crear una tarjeta de producto con imagen
 function crearTarjetaProducto(producto) {
+    // Detectar si la descripción es de una sola línea o múltiples líneas
+    const esUnaLinea = producto.descripcion.length <= 50; // Aproximadamente 50 caracteres por línea
+    const claseDescripcion = esUnaLinea ? 'single-line' : 'multi-line';
+    
     return `
         <div class="product-card">
         <!-- Validación para la imagen -->
@@ -396,7 +400,7 @@ function crearTarjetaProducto(producto) {
             ''}
 
         <h3 class="product-name">${producto.nombre}</h3>
-        <p class="product-description">${producto.descripcion}</p>
+        <p class="product-description ${claseDescripcion}">${producto.descripcion}</p>
         ${producto.observacion !== "Sin observación" ? 
             `<span class="product-observation">${producto.observacion}</span>` : 
             '<span class="product-observation" style="visibility: hidden;">Sin observación</span>'}
@@ -407,13 +411,17 @@ function crearTarjetaProducto(producto) {
 
 // Función para crear tarjeta especial de frijol simple
 function crearTarjetaFrijolSimple() {
+    const descripcion = "Porción de frijol | Con desechable";
+    const esUnaLinea = descripcion.length <= 50;
+    const claseDescripcion = esUnaLinea ? 'single-line' : 'multi-line';
+    
     return `
         <div class="product-card">
             <img src="img/18.jpg" alt="Porción de frijol" class="product-image">
             <h3 class="product-name">Porción de Frijol</h3>
-            <p class="product-description">Porción de frijol con o sin desechable</p>
+            <p class="product-description ${claseDescripcion}">${descripcion}</p>
             <div class="product-price">
-                <div class="precio-simple">${formatearPrecio(10000)}</div>
+                <div class="precio-simple">${formatearPrecio(10000)}</div>|
                 <div class="precio-desechable">${formatearPrecio(10500)}</div>
             </div>
         </div>
@@ -422,13 +430,17 @@ function crearTarjetaFrijolSimple() {
 
 // Función para crear tarjeta especial de frijol con chicharrón
 function crearTarjetaFrijolConChicharron() {
+    const descripcion = "Porción de frijol ychicharrón | Con desechable";
+    const esUnaLinea = descripcion.length <= 50;
+    const claseDescripcion = esUnaLinea ? 'single-line' : 'multi-line';
+    
     return `
         <div class="product-card">
             <img src="img/17.jpg" alt="Porción de frijol con chicharrón" class="product-image">
-            <h3 class="product-name">Porción de Frijol con Chicharrón</h3>
-            <p class="product-description">Porción de frijol con chicharrón con o sin desechable</p>
+            <h3 class="product-name">Porción de Frijol y Chicharrón</h3>
+            <p class="product-description ${claseDescripcion}">${descripcion}</p>
             <div class="product-price">
-                <div class="precio-simple">${formatearPrecio(11000)}</div>
+                <div class="precio-simple">${formatearPrecio(11000)}</div>|
                 <div class="precio-desechable">${formatearPrecio(12000)}</div>
             </div>
         </div>
@@ -627,6 +639,9 @@ function mostrarPagina(pagina) {
     // Actualizar estado de botones
     document.getElementById('btnAnterior').disabled = pagina === 0;
     document.getElementById('btnSiguiente').disabled = pagina === totalPaginas - 1;
+    
+    // Detectar dinámicamente el tipo de descripción después de renderizar
+    setTimeout(detectarTipoDescripcion, 100);
 }
 
 // Función para ir a la página anterior
@@ -718,6 +733,9 @@ document.addEventListener('DOMContentLoaded', function() {
     mostrarPagina(0);
     mostrarProductosSinImagen();
     
+    // Detectar tipo de descripción después de la carga inicial
+    setTimeout(detectarTipoDescripcion, 500);
+    
     // Agregar event listeners a los botones
     document.getElementById('btnAnterior').addEventListener('click', paginaAnterior);
     document.getElementById('btnSiguiente').addEventListener('click', paginaSiguiente);
@@ -801,4 +819,28 @@ function manejarErrorImagen(img) {
         this.src = 'img/default.jpg';
         this.alt = 'Imagen no disponible';
     };
+}
+
+// Función para detectar dinámicamente si el texto es de una o múltiples líneas
+function detectarTipoDescripcion() {
+    const descripciones = document.querySelectorAll('.product-description');
+    
+    descripciones.forEach(descripcion => {
+        // Obtener el texto real
+        const texto = descripcion.textContent || descripcion.innerText;
+        
+        // Calcular si es de una sola línea basándose en el ancho del contenedor
+        const rect = descripcion.getBoundingClientRect();
+        const esUnaLinea = texto.length <= 50 || rect.height <= 60; // 60px es aproximadamente la altura de una línea
+        
+        // Remover clases anteriores
+        descripcion.classList.remove('single-line', 'multi-line');
+        
+        // Agregar la clase apropiada
+        if (esUnaLinea) {
+            descripcion.classList.add('single-line');
+        } else {
+            descripcion.classList.add('multi-line');
+        }
+    });
 }
