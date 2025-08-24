@@ -739,6 +739,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Agregar navegación táctil para dispositivos móviles
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    // Detectar inicio del toque
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    
+    // Detectar fin del toque
+    document.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, false);
+    
+    // Función para manejar el swipe
+    function handleSwipe() {
+        const swipeThreshold = 50; // Umbral mínimo para considerar un swipe
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                // Swipe hacia la derecha = ir a página anterior
+                if (paginaActual === 0) {
+                    irAPagina(totalPaginas - 1); // Ir al final desde el inicio
+                } else {
+                    paginaAnterior();
+                }
+            } else {
+                // Swipe hacia la izquierda = ir a página siguiente
+                if (paginaActual === totalPaginas - 1) {
+                    irAPagina(0); // Ir al inicio desde el final
+                } else {
+                    paginaSiguiente();
+                }
+            }
+        }
+    }
+    
     // Auto-rotación con contador reanudado (cambiar página cada 17 segundos)
     let autoRotacionInterval = setInterval(() => {
         continuarSecuenciaCarousel();
